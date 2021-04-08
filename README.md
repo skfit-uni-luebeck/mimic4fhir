@@ -1,6 +1,17 @@
 # mimic4fhir 
 ## Introduction
-mimic4fhir converts data from MIMIC IV database (PostgreSQL) to HL7 FHIR R4 resources. To get access to MIMIC-IV , you have to complete a privacy course, see [here](https://mimic-iv.mit.edu/docs/access/) for more information. In addition to the MIMIC data, four FHIR ConceptMaps are needed for the translation of the codes. You can find a program to generate them [here](https://github.com/itcr-uni-luebeck/AthenaConceptMaps).
+mimic4fhir converts data from MIMIC IV database (PostgreSQL) to HL7 FHIR R4 resources or the German core data set of [Medical Informatics Initiative](https://www.medizininformatik-initiative.de/de/der-kerndatensatz-der-medizininformatik-initiative). Currently the following modules are supported: 
+- Patient
+- Encounter
+- Diagnosis
+- Procedure
+- Laboratory Results
+- Medication
+- Imaging techniques
+
+To get access to MIMIC-IV , you have to complete a privacy course, see [here](https://mimic-iv.mit.edu/docs/access/) for more information. In addition to the MIMIC data, four FHIR ConceptMaps are needed for the translation of the codes. You can find a program to generate the necessary FHIR ConceptMaps [here](https://github.com/itcr-uni-luebeck/AthenaConceptMaps).
+
+[FHIR-Modules.pdf](https://github.com/itcr-uni-luebeck/mimic4fhir/files/6280022/FHIR-Modules.pdf)
 
 ## How to use
 Bundles are created per patient admission/encounter. If the number of resources in a bundle exceeds 15000, a new bundle will be created. This limits the bundle size to ~20MB and are transcaction bundles with [conditional creates](https://www.hl7.org/fhir/http.html#ccreate).
