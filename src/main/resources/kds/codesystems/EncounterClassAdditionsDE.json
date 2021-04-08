@@ -1,0 +1,63 @@
+{
+  "resourceType": "CodeSystem",
+  "title": "Medizininformatik-Initiative - CodeSystem - EncounterClassAdditionsDE",
+  "name": "EncounterClassAdditionsDE",
+  "experimental": false,
+  "url": "https://www.medizininformatik-initiative.de/fhir/core/modul-fall/CodeSystem/EncounterClassAdditionsDE",
+  "version": "1.0",
+  "status": "active",
+  "compositional": false,
+  "content": "complete",
+  "concept": [
+    {
+      "code": "begleitperson",
+      "display": "Begleitperson"
+    },
+    {
+      "code": "vorstationaer",
+      "display": "Vorstationär"
+    },
+    {
+      "code": "nachstationaer",
+      "display": "Nachstationär"
+    },
+    {
+      "display": "Teilstationäre Behandlung",
+      "code": "teilstationaer",
+      "definition": "Eine teilstationäre Behandlung unterscheidet sich im Wesentlichen von einer vollstationären Behandlung durch eine regelmäßige, aber nicht zeitlich durchgehende Anwesenheit der Patientin oder des Patienten im Krankenhaus. Im Rahmen der teilstationären Behandlung kann Unterkunft und Verpflegung gewährt werden."
+    },
+    {
+      "code": "normalstationaer",
+      "display": "Normalstationär"
+    },
+    {
+      "code": "intensivstationaer",
+      "display": "Intensivstationär",
+      "definition": "Intensivstationäre Kontakte sind Kontakte mit einer Station, die zur intensivmedizinischen Behandlung im Krankenhausplan bzw. Förderungsbescheid zugelassen sind"
+    },
+    {
+      "code": "tagesklinik",
+      "display": "Tagesklinische Behandlung"
+    },
+    {
+      "code": "ub",
+      "display": "Untersuchung und Behandlung",
+      "definition": "Aufenthalt auf einer Funktionsabteilung zur Durchführung spezieller diagnostischer/therapeutischer Maßnahmen"
+    },
+    {
+      "code": "konsil",
+      "display": "Konsil",
+      "definition": "Arztkontakte im Rahmen z.B. von Aufklärungsgesprächen, Visiten etc."
+    },
+    {
+      "code": "stationsaequivalent",
+      "display": "Stationsäquivalent",
+      "definition": "Psychiatrische Krankenhäuser mit regionaler Versorgungsverpflichtung sowie Allgemeinkrankenhäuser mit selbständigen, fachärztlich geleiteten psychiatrischen Abteilungen mit regionaler Versorgungsverpflichtung können in medizinisch geeigneten Fällen, wenn eine Indikation für eine stationäre psychiatrische Behandlung vorliegt, anstelle einer vollstationären Behandlung eine stationsäquivalente psychiatrische Behandlung im häuslichen Umfeld erbringen"
+    },
+    {
+      "code": "operation",
+      "display": "Operation",
+      "definition": "Aufenthalt in OP-Bereichen zur Durchführung von operativen Eingriffen inklusive Vor- und Nachbereitung"
+    }
+  ]
+}

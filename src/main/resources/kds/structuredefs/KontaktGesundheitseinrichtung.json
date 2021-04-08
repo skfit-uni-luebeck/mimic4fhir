@@ -1,0 +1,469 @@
+{
+  "resourceType": "StructureDefinition",
+  "url": "https://fhir.simplifier.net/MedizininformatikInitiative-ModulFall/StructureDefinition/ea14cad5-72e0-485f-8188-4527a2a45b5b",
+  "version": "1.0",
+  "name": "KontaktGesundheitseinrichtung",
+  "title": "Medizininformatik-Initative - StructureDefinition - Kontakt mit einer Gesundheitseinrichtung",
+  "status": "active",
+  "fhirVersion": "4.0.1",
+  "mapping": [
+    {
+      "identity": "workflow",
+      "uri": "http://hl7.org/fhir/workflow",
+      "name": "Workflow Pattern"
+    },
+    {
+      "identity": "rim",
+      "uri": "http://hl7.org/v3",
+      "name": "RIM Mapping"
+    },
+    {
+      "identity": "w5",
+      "uri": "http://hl7.org/fhir/fivews",
+      "name": "FiveWs Pattern Mapping"
+    },
+    {
+      "identity": "v2",
+      "uri": "http://hl7.org/v2",
+      "name": "HL7 v2 Mapping"
+    }
+  ],
+  "kind": "resource",
+  "abstract": false,
+  "type": "Encounter",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Encounter",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Encounter",
+        "path": "Encounter",
+        "constraint": [
+          {
+            "key": "mii-enc-1",
+            "severity": "error",
+            "human": "Falls der Encounter abgeschlossen wurde muss ein Enddatum bekannt sein",
+            "expression": "status = 'finished' implies period.end.exists()",
+            "source": "https://www.medizininformatik-initiative.de/fhir/core/StructureDefinition/Encounter/KontaktGesundheitseinrichtung"
+          },
+          {
+            "key": "mii-enc-2",
+            "severity": "error",
+            "human": "Falls der Encounter abgeschlossen wurde muss eine Diagnose bekannt sein",
+            "expression": "status = 'finished' implies diagnosis.exists()",
+            "source": "https://www.medizininformatik-initiative.de/fhir/core/StructureDefinition/Encounter/KontaktGesundheitseinrichtung"
+          }
+        ]
+      },
+      {
+        "id": "Encounter.id",
+        "path": "Encounter.id",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.meta",
+        "path": "Encounter.meta",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.meta.source",
+        "path": "Encounter.meta.source",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.meta.profile",
+        "path": "Encounter.meta.profile",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.identifier",
+        "path": "Encounter.identifier",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "pattern",
+              "path": "$this"
+            }
+          ],
+          "rules": "open"
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.identifier:aufnahmenummer",
+        "path": "Encounter.identifier",
+        "sliceName": "aufnahmenummer",
+        "max": "1",
+        "patternIdentifier": {
+          "type": {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                "code": "VN"
+              }
+            ]
+          }
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.identifier:aufnahmenummer.type",
+        "path": "Encounter.identifier.type",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.identifier:aufnahmenummer.type.coding",
+        "path": "Encounter.identifier.type.coding",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "pattern",
+              "path": "$this"
+            }
+          ],
+          "rules": "open"
+        }
+      },
+      {
+        "id": "Encounter.identifier:aufnahmenummer.type.coding:vn-type",
+        "path": "Encounter.identifier.type.coding",
+        "sliceName": "vn-type",
+        "min": 1,
+        "max": "1",
+        "patternCoding": {
+          "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+          "code": "VN"
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.identifier:aufnahmenummer.type.coding:vn-type.system",
+        "path": "Encounter.identifier.type.coding.system",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.identifier:aufnahmenummer.type.coding:vn-type.code",
+        "path": "Encounter.identifier.type.coding.code",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.identifier:aufnahmenummer.system",
+        "path": "Encounter.identifier.system",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.identifier:aufnahmenummer.value",
+        "path": "Encounter.identifier.value",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.status",
+        "path": "Encounter.status",
+        "short": "planned | | in-progress | onleave | finished | cancelled +",
+        "definition": "planned | | in-progress | onleave | finished | cancelled +",
+        "mustSupport": true,
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://www.medizininformatik-initiative.de/fhir/core/ValueSet/RestrictedEncounterStatus"
+        }
+      },
+      {
+        "id": "Encounter.class",
+        "path": "Encounter.class",
+        "mustSupport": true,
+        "binding": {
+          "strength": "extensible",
+          "valueSet": "https://www.medizininformatik-initiative.de/fhir/core/ValueSet/EncounterClassDE"
+        }
+      },
+      {
+        "id": "Encounter.type",
+        "path": "Encounter.type",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "pattern",
+              "path": "$this"
+            }
+          ],
+          "rules": "open"
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.type:kontaktebene",
+        "path": "Encounter.type",
+        "sliceName": "kontaktebene",
+        "max": "1",
+        "mustSupport": true,
+        "binding": {
+          "strength": "required",
+          "description": "Kontaktebene",
+          "valueSet": "https://www.medizininformatik-initiative.de/fhir/core/modul-fall/ValueSet/Kontaktebene"
+        }
+      },
+      {
+        "id": "Encounter.serviceType",
+        "path": "Encounter.serviceType",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.serviceType.coding",
+        "path": "Encounter.serviceType.coding",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "pattern",
+              "path": "$this"
+            }
+          ],
+          "rules": "open"
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.serviceType.coding:fachabteilungsschluessel",
+        "path": "Encounter.serviceType.coding",
+        "sliceName": "fachabteilungsschluessel",
+        "max": "1",
+        "patternCoding": {
+          "system": "https://www.medizininformatik-initiative.de/fhir/core/modul-fall/CodeSystem/Fachabteilungsschluessel"
+        },
+        "mustSupport": true,
+        "binding": {
+          "strength": "extensible",
+          "valueSet": "https://www.medizininformatik-initiative.de/fhir/core/modul-fall/CodeSystem/Fachabteilungsschluessel"
+        }
+      },
+      {
+        "id": "Encounter.serviceType.coding:fachabteilungsschluessel.system",
+        "path": "Encounter.serviceType.coding.system",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.serviceType.coding:fachabteilungsschluessel.code",
+        "path": "Encounter.serviceType.coding.code",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.subject",
+        "path": "Encounter.subject",
+        "min": 1,
+        "type": [
+          {
+            "code": "Reference",
+            "profile": [
+              "https://www.medizininformatik-initiative.de/fhir/core/StructureDefinition/MII-Reference"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.period",
+        "path": "Encounter.period",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.period.start",
+        "path": "Encounter.period.start",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.period.end",
+        "path": "Encounter.period.end",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.reasonCode.coding",
+        "path": "Encounter.reasonCode.coding",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "pattern",
+              "path": "$this"
+            }
+          ],
+          "rules": "open"
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.reasonCode.coding:aufnahmegrund",
+        "path": "Encounter.reasonCode.coding",
+        "sliceName": "aufnahmegrund",
+        "max": "1",
+        "patternCoding": {
+          "system": "https://www.medizininformatik-initiative.de/fhir/modul-fall/core/CodeSystem/Aufnahmegrund"
+        },
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://www.medizininformatik-initiative.de/fhir/modul-fall/core/ValueSet/Aufnahmegrund"
+        }
+      },
+      {
+        "id": "Encounter.reasonCode.coding:aufnahmegrund.system",
+        "path": "Encounter.reasonCode.coding.system",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.reasonCode.coding:aufnahmegrund.code",
+        "path": "Encounter.reasonCode.coding.code",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.diagnosis",
+        "path": "Encounter.diagnosis",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.diagnosis.condition",
+        "path": "Encounter.diagnosis.condition",
+        "type": [
+          {
+            "code": "Reference",
+            "profile": [
+              "https://www.medizininformatik-initiative.de/fhir/core/StructureDefinition/MII-Reference"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.diagnosis.use",
+        "path": "Encounter.diagnosis.use",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.diagnosis.rank",
+        "path": "Encounter.diagnosis.rank",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.hospitalization",
+        "path": "Encounter.hospitalization",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.hospitalization.admitSource",
+        "path": "Encounter.hospitalization.admitSource",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.hospitalization.admitSource.coding",
+        "path": "Encounter.hospitalization.admitSource.coding",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "pattern",
+              "path": "$this"
+            }
+          ],
+          "rules": "open"
+        },
+        "min": 1
+      },
+      {
+        "id": "Encounter.hospitalization.admitSource.coding:aufnahmeanlass",
+        "path": "Encounter.hospitalization.admitSource.coding",
+        "sliceName": "aufnahmeanlass",
+        "min": 1,
+        "max": "1",
+        "patternCoding": {
+          "system": "https://www.medizininformatik-initiative.de/fhir/core/modul-fall/CodeSystem/Aufnahmeanlass"
+        },
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://www.medizininformatik-initiative.de/fhir/core/modul-fall/ValueSet/Aufnahmeanlass"
+        }
+      },
+      {
+        "id": "Encounter.hospitalization.admitSource.coding:aufnahmeanlass.system",
+        "path": "Encounter.hospitalization.admitSource.coding.system",
+        "min": 1,
+        "fixedUri": "https://www.medizininformatik-initiative.de/fhir/core/modul-fall/CodeSystem/Aufnahmeanlass",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.hospitalization.admitSource.coding:aufnahmeanlass.code",
+        "path": "Encounter.hospitalization.admitSource.coding.code",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.hospitalization.dischargeDisposition",
+        "path": "Encounter.hospitalization.dischargeDisposition",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.hospitalization.dischargeDisposition.coding",
+        "path": "Encounter.hospitalization.dischargeDisposition.coding",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "pattern",
+              "path": "$this"
+            }
+          ],
+          "rules": "open"
+        },
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.hospitalization.dischargeDisposition.coding:entlassungsgrund",
+        "path": "Encounter.hospitalization.dischargeDisposition.coding",
+        "sliceName": "entlassungsgrund",
+        "min": 1,
+        "max": "1",
+        "patternCoding": {
+          "system": "https://www.medizininformatik-initiative.de/fhir/core/modul-fall/CodeSystem/Entlassungsgrund"
+        },
+        "mustSupport": true,
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://www.medizininformatik-initiative.de/fhir/core/modul-fall/ValueSet/Entlassungsgrund"
+        }
+      },
+      {
+        "id": "Encounter.hospitalization.dischargeDisposition.coding:entlassungsgrund.system",
+        "path": "Encounter.hospitalization.dischargeDisposition.coding.system",
+        "min": 1,
+        "fixedUri": "https://www.medizininformatik-initiative.de/fhir/core/modul-fall/CodeSystem/Entlassungsgrund",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.hospitalization.dischargeDisposition.coding:entlassungsgrund.code",
+        "path": "Encounter.hospitalization.dischargeDisposition.coding.code",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.location",
+        "path": "Encounter.location",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.serviceProvider",
+        "path": "Encounter.serviceProvider",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.partOf",
+        "path": "Encounter.partOf",
+        "mustSupport": true
+      }
+    ]
+  }
+}
