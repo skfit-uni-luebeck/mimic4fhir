@@ -31,7 +31,7 @@ app.setTopPatients(10);
 A [RabbitMQ server](https://www.rabbitmq.com/) is required to run on localhost. 
 Please note: Performance is highly dependent on the following and might be quite low:
 - database partitioning and indexing for table chartevents (by HADM_ID)
-    - There is a script [here](link) which adds additional indeces to the PostgresSQL DB
+    - There is a script [here](https://github.com/itcr-uni-luebeck/mimic4fhir/blob/main/src/main/resources/custom_indexes.sql) which adds additional indeces to the PostgresSQL DB
 - server performance (if pushed to a server)
 
 We recommend starting with a low number of patients and with saving to xml files to check the database performance.   
@@ -39,54 +39,54 @@ We recommend starting with a low number of patients and with saving to xml files
 ### Example main method:
 ```java
 // Add server and config data..
-		Config configObj = new Config();
+	Config configObj = new Config();
+	
+	// Postgres
+	configObj.setPassPostgres("Pa33word!");
+	configObj.setPortPostgres("5432");
+	configObj.setUserPostgres("user");
+	configObj.setPostgresServer("192.168.0.1");
+	configObj.setDbnamePostgres("postgres");
 
-		// Postgres
-		configObj.setPassPostgres("Pa33word!");
-		configObj.setPortPostgres("5432");
-		configObj.setUserPostgres("user");
-		configObj.setPostgresServer("192.168.0.1");
-		configObj.setDbnamePostgres("postgres");
+	// Fhir
+	configObj.setFhirServer("http://server.com/fhir/");
+	configObj.setFhirxmlFilePath("output/");
 
-		// Fhir
-		configObj.setFhirServer("http://server.com/fhir/");
-		configObj.setFhirxmlFilePath("output/");
+	// Validation
+	// Set to true, if you want to validate with the InstanceValidator
+	configObj.setValidateResources(false);
 
-		// Validation
-		// Set to true, if you want to validate with the InstanceValidator
-		configObj.setValidateResources(false);
-
-		// ConceptMaps URI needed for the conversion
-		configObj.setICD9toICD10GM("https://server.com/fhir/ConceptMap/d9be1278-282b-4e80-8be5-226cb30a9eb5");
-		configObj.setICD9ToSnomed("https://server.com/fhir/ConceptMap/9f0b2a1f-8253-47fc-a8cf-118226823e22");
-		configObj.setICD9ProcToSnomed("https://server.com/fhir/ConceptMap/01c83771-6524-46ef-aaa8-4f63e1d837ea");
-		configObj.setICD10PCStoSnomed("https://server.com/fhir/ConceptMap/03ea8e3a-7fc3-4fb3-8e30-21af497c2a63");
+	// ConceptMaps URI needed for the conversion
+	configObj.setICD9toICD10GM("https://server.com/fhir/ConceptMap/d9be1278-282b-4e80-8be5-226cb30a9eb5");
+	configObj.setICD9ToSnomed("https://server.com/fhir/ConceptMap/9f0b2a1f-8253-47fc-a8cf-118226823e22");
+	configObj.setICD9ProcToSnomed("https://server.com/fhir/ConceptMap/01c83771-6524-46ef-aaa8-4f63e1d837ea");
+	configObj.setICD10PCStoSnomed("https://server.com/fhir/ConceptMap/03ea8e3a-7fc3-4fb3-8e30-21af497c2a63");
 		
-		// Use CXR 
-		// If you have access to the CXR, the conversion will added DiagnosticReport and ImagingStudying
-		//for the corresponding patients
-		configObj.setUseCXR(false);
+	// Use CXR 
+	// If you have access to the CXR, the conversion will added DiagnosticReport and ImagingStudying
+	// for the corresponding patients
+	configObj.setUseCXR(false);
 		
-		//Specification 
-		// Choose plain R4 or the German MII KDS output
-		configObj.setSpecification(ModelVersion.KDS);
+	//Specification 
+	// Choose plain R4 or the German MII KDS output
+	configObj.setSpecification(ModelVersion.KDS);
 
-		Mimic4Fhir app = new Mimic4Fhir();
-		app.setConfig(configObj);
-		app.setOutputMode(OutputMode.PRINT_FILE);
-		// 25 Patients chosen random (boolean flag) from the MIMIC IV
-		app.setTopPatients(25, true);
-		// You can run the conversion single-threaded
-		//app.start();
-		// Or with 10 Threads
-		app.startWithThread();
+	Mimic4Fhir app = new Mimic4Fhir();
+	app.setConfig(configObj);
+	app.setOutputMode(OutputMode.PRINT_FILE);
+	// 25 Patients chosen random (boolean flag) from the MIMIC IV
+	app.setTopPatients(25, true);
+	// You can run the conversion single-threaded
+	//app.start();
+	// Or with 10 Threads
+	app.startWithThread();
 ```
 
 In addition, there is a command line interface to accelerate the creation for automated testing.
 
 ```sh
 
-java -jar target/mimic4fhir-1.0.0-jar-with-dependencies.jar -help
+java -jar target/mimic4fhir-1.0.0-jar-with-dependencies.jar --help
   -d, --database=<postgresDatabase>
                              The PostgreSQL Database
       --debug                Prints bundle into the console
