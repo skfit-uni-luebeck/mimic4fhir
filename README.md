@@ -1,6 +1,6 @@
 # mimic4fhir 
 ## Introduction
-mimic4fhir converts data from MIMIC IV database (PostgreSQL) to HL7 FHIR R4 resources or the German core data set of [Medical Informatics Initiative](https://www.medizininformatik-initiative.de/de/der-kerndatensatz-der-medizininformatik-initiative). Currently the following modules are supported: 
+mimic4fhir converts data from [MIMIC IV database](https://mimic.mit.edu/) (PostgreSQL) to HL7 FHIR R4 resources or the German core data set of [Medical Informatics Initiative](https://www.medizininformatik-initiative.de/de/der-kerndatensatz-der-medizininformatik-initiative). Currently the following modules are supported: 
 - Patient
 - Encounter
 - Diagnosis
