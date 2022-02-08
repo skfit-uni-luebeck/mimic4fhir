@@ -1,0 +1,22 @@
+{
+    "creators": [
+        {
+            "affiliation": "University of Lübeck, Lübeck",
+            "name": "Ulrich, Hannes",
+            "orcid": "0000-0002-8349-6798"
+        },
+        {
+            "affiliation": "University of Lübeck, Lübeck",
+            "name": "Wiedekopf, Joshua",
+            "orcid": "0000-0002-9902-6459"
+        }
+    ],
+    "description": "mimic4fhir converts data from MIMIC IV database (PostgreSQL) to HL7 FHIR R4 resources or the German core data set of Medical Informatics Initiative.",
+    "keywords": [
+        "FHIR",
+        "MIMIC IV"        
+    ],
+    "license": "AGPL-3.0",
+    "title": "mimic4fhir",
+    "upload_type": "software"
+}
