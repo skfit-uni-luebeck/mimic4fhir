@@ -1,4 +1,4 @@
-# mimic4fhir 
+# mimic4fhir [![DOI](https://zenodo.org/badge/353639014.svg)](https://zenodo.org/badge/latestdoi/353639014)
 ## Introduction
 mimic4fhir converts data from [MIMIC IV database](https://mimic.mit.edu/) (PostgreSQL) to HL7 FHIR R4 resources or the German core data set of [Medical Informatics Initiative](https://www.medizininformatik-initiative.de/de/der-kerndatensatz-der-medizininformatik-initiative). Currently the following modules are supported: 
 - Patient
