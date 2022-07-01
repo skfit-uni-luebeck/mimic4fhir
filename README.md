@@ -123,4 +123,4 @@ java -jar target/mimic4fhir-1.0.0-jar-with-dependencies.jar --server=192.186.0.1
 ```
 
 ## License
-This source code is licensed under GNU Affero General Public License v3 (AGPL-3.0).
+This source code is licensed under Apache 2.
